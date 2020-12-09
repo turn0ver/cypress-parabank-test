@@ -41,16 +41,28 @@ describe('parabank', () => {
             
     });
 
-    // it('devem poder realizar um login no sistema', () => {
-    //     // cy.get - busca um elemento
-    //     // .type - insere um texto
-    //     cy.visit('http://parabank.parasoft.com/parabank/index.htm');
-    //     cy.get('[name="username"]').type('prendin3');
-    //     cy.get('[name="password"]').type('testeteste');
-    //     cy.get('[value="Log In"]').click();
-    // });
+    it('devem poder realizar um login no sistema', () => {
+        cy.visit('http://parabank.parasoft.com/parabank/index.htm');
+        cy.get('[name="username"]').type('prendin4');
+        cy.get('[name="password"]').type('testeteste');
+        cy.get('[value="Log In"]').click();
+    });
 
     it('devem poder realizar uma tranferencia para outra conta', () => {
+        cy.visit('http://parabank.parasoft.com/parabank/index.htm')
+        cy.get('[name="username"]').type('prendin4')
+        cy.get('[name="password"]').type('testeteste')
+        cy.get('[value="Log In"]').click()
+
+        cy.get('#leftPanel > ul > :nth-child(2) > a').click()
+        cy.get('.ng-scope > :nth-child(1) > .ng-binding').click()
+
+        cy.get('#leftPanel > ul > :nth-child(3) > a').click()
+        cy.wait(3000)
+        cy.get('#amount').type('100')
+        cy.get('#amount').should('have.value', '100');
+
+        cy.get(':nth-child(4) > .button').click();
         
     });
 
